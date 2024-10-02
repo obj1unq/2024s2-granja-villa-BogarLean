@@ -10,14 +10,18 @@ object hector {
 		return "x:" + position.x() + " y:" + position.y()
 		//Para probar
 	}
-	method sembrar() {
-		//¿Funciona con la clase o debo hacer un objecto? ej:
-		//const maiz = new Maiz()
-		//const trigo = new Trigo()
-		//const tomaco = new Tomaco()
-		keyboard.m().onPressDo({Maiz.plantar()})
-		keyboard.t().onPressDo({Trigo.plantar()})
-		keyboard.o().onPressDo({Tomaco.plantar()})
+	method sembrar(cultivo) {
+		//Hector es el que las planta, los cultivos no se plantan ellos mismos
+		self.validarSembrar()
+		cultivo.position(position)
+		game.addVisual(cultivo)
+		
+	}
+	method validarSembrar() {
+	  if (self.hayColision()) {
+		self.error("No puedo plantar acá")
+		//No aparece el texto por algún motivo
+	  }
 	}
 	method hayColision() {
       const colisiones = game.colliders(self)
