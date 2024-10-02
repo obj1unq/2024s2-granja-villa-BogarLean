@@ -31,14 +31,13 @@ class Trigo {
 class Tomaco {
 	var property position = game.at(3, 2)
 	method image() {
-		// TODO: hacer que devuelva la imagen que corresponde
 		return "tomaco.png"
 	}
 	method regado() {
-	  self.validarMover()
+	  self.validarSubir()
 	  position = position.up(1)
 	}
-	method validarMover() {
+	method validarSubir() {
 		if (not self.puedeSubir(position)) {
 			self.error("No puedo moverme")
 		}
