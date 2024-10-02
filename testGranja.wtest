@@ -1,14 +1,26 @@
-import game.*
+import wollok.game.*
 import hector.*
 import cultivos.*
+import tablero.*
 
-describe "group of tests for pepita" {
-  game.height(10)
-	game.width(10)
-  
-  test "description" {
-    
-    assert.equals(value, expression)
+
+describe "Granja de Hector" {
+  method initialize() {
+	  game.height(10)
+	  game.width(10)
+    game.addVisualCharacter(hector)
   }
+  test "No se puede plantar en el mismo lugar" {
+    assert.doesNotThrowException({ hector.validarSembrar() })
 
+    hector.sembrar(new Maiz())
+    
+    assert.throwsException({ hector.validarSembrar() })
+  }
+  test "Hay planta acá" {
+    hector.sembrar(new Maiz())
+
+    assert.that(tablero.hayPlantaConHector())
+    assert.doesNotThrowException({ tablero.validarRegar() })
+  }
 }

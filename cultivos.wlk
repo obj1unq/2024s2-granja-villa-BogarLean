@@ -1,5 +1,7 @@
 import wollok.game.*
 import hector.*
+import tablero.*
+
 
 
 class Maiz {
@@ -7,6 +9,9 @@ class Maiz {
 	method image() {
 		// TODO: hacer que devuelva la imagen que corresponde
 		return "corn_baby.png"
+	}
+	method regado() {
+	  
 	}
 	
 	
@@ -18,6 +23,9 @@ class Trigo {
 		// TODO: hacer que devuelva la imagen que corresponde
 		return "wheat_0.png"
 	}
+	method regado() {
+	  
+	}
 	
 }
 class Tomaco {
@@ -26,5 +34,17 @@ class Tomaco {
 		// TODO: hacer que devuelva la imagen que corresponde
 		return "tomaco.png"
 	}
+	method regado() {
+	  self.validarMover()
+	  position = position.up(1)
+	}
+	method validarMover() {
+		if (not self.puedeSubir(position)) {
+			self.error("No puedo moverme")
+		}
+	}
+	method puedeSubir(posicion) {
+        return (posicion != game.at(game.width() - 1, posicion.y()))
+    }
 	
 }
