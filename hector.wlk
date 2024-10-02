@@ -15,15 +15,9 @@ object hector {
 		//const maiz = new Maiz()
 		//const trigo = new Trigo()
 		//const tomaco = new Tomaco()
-		self.validarSembrar()
 		keyboard.m().onPressDo({Maiz.plantar()})
 		keyboard.t().onPressDo({Trigo.plantar()})
 		keyboard.o().onPressDo({Tomaco.plantar()})
-	}
-	method validarSembrar() {
-		if (self.hayColision()) {
-			self.error("No se puede sembrar acá")
-		}
 	}
 	method hayColision() {
       const colisiones = game.colliders(self)
