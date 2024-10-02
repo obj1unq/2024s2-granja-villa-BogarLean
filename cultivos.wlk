@@ -43,7 +43,7 @@ class Tomaco {
 		}
 	}
 	method puedeSubir(posicion) {
-        return (posicion != game.at(game.width() - 1, posicion.y()))
+        return (posicion != game.at(posicion.x(), game.height() - 1))
     }
 	
 }

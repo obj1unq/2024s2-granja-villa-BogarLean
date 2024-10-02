@@ -21,6 +21,15 @@ describe "Granja de Hector" {
     hector.sembrar(new Maiz())
 
     assert.that(tablero.hayPlantaConHector())
+  }
+  test "Regar tomaco" {
+    hector.sembrar(new Tomaco())
+
+    assert.that(tablero.hayPlantaConHector())
     assert.doesNotThrowException({ tablero.validarRegar() })
+
+    hector.regar()
+
+    assert.notThat(tablero.hayPlantaConHector())
   }
 }
