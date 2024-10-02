@@ -5,7 +5,7 @@ import tablero.*
 class Maiz {
 	var property position = game.at(1, 1)
 	var property estado = "baby"
-
+	
 	method image() = ("corn_" + estado) + ".png"
 	
 	method regado() {
@@ -15,12 +15,12 @@ class Maiz {
 
 class Trigo {
 	var property position = game.at(4, 1)
+	var property estapaDeEvolucion = 0
 	
-	method image() = "wheat_0.png"
+	method image() = ("wheat_" + estapaDeEvolucion) + ".png"
 	
 	method regado() {
-		
-		// Hm
+		estapaDeEvolucion = (estapaDeEvolucion + 1) % 4
 	}
 }
 
