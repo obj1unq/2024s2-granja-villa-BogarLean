@@ -26,14 +26,14 @@ object hector {
 	}
 	
 	method regar() {
-		const cultivo = game.uniqueCollider(self)
 		granja.validarRegar(self.position())
+		const cultivo = game.uniqueCollider(self)
 		cultivo.regar()
 	}
 	
 	method cosechar() {
-		const cultivo = game.uniqueCollider(self)
 		granja.validarCosechar(self.position())
+		const cultivo = game.uniqueCollider(self)
 		self.agregarCosecha(cultivo)
 		cultivo.cosechar()
 	}
@@ -41,26 +41,22 @@ object hector {
 	method agregarCosecha(cultivo) {
 		cosecha.add(cultivo)
 	}
-
-	method decirOroYCultivos() {
-	  return game.say(self, oro + " de oro y " + self.cantidadCosechada() + " cultivos para vender")
+	
+	method decirOroYCosechados() {
+		game.say(
+			self,
+			((("Tengo " + oro) + " de oro y ") + self.cantidadCosechada()) + " cultivos para vender"
+		)
 	}
-
-	method cantidadCosechada() {
-		return cosecha.size()
-	}
-
+	
+	method cantidadCosechada() = cosecha.size()
+	
 	method vender() {
 		self.validarVender()
-		cosecha.sum({cultivo => cultivo.valor()})
+		oro = cosecha.sum({ cultivo => cultivo.valor() })
 	}
-
+	
 	method validarVender() {
-		if (cosecha.isEmpty()) {
-			self.error("No tengo cultvios que vender")
-		}
+		if (cosecha.isEmpty()) self.error("No tengo cultvios que vender")
 	}
-
-	// ↓↓↓↓ BORRAR DESPUÉS
-	method text() = (("x:" + position.x()) + " y:") + position.y()
 }

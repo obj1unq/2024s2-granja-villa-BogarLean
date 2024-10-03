@@ -37,10 +37,8 @@ class Trigo {
 	}
 	
 	method esCosechable() = estapaDeEvolucion >= 2
-
-	method valor() {
-		return (estapaDeEvolucion - 1) * 100
-	}
+	
+	method valor() = (estapaDeEvolucion - 1) * 100
 }
 
 class Tomaco {
@@ -61,8 +59,8 @@ class Tomaco {
 	method puedeSubir(posicion) = (posicion != game.at(
 		posicion.x(),
 		game.height() - 1
-	)) and not granja.hayAlgoArribaDe(self)
-	// No me gustaba que atravezase a otros cultivos))
+	)) and (not granja.hayAlgoArribaDe(self)
+	// No me gustaba que atravezase a otros cultivos)))
 	
 	method cosechar() {
 		granja.quitarCultivo(self)

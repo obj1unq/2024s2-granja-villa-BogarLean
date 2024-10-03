@@ -12,14 +12,14 @@ program farmville {
 	//  VISUALES
  	game.addVisualCharacter(hector)
 
-	// ¿Controles?
+	// CONTROLES
 	keyboard.m().onPressDo({hector.sembrar(new Maiz())})
 	keyboard.t().onPressDo({hector.sembrar(new Trigo())})
 	keyboard.o().onPressDo({hector.sembrar(new Tomaco())})
 	keyboard.r().onPressDo({hector.regar()})
 	keyboard.c().onPressDo({hector.cosechar()})
 	keyboard.v().onPressDo({hector.vender()})
-	keyboard.space().onPressDo({hector.decirOroYCultivos()})
+	keyboard.space().onPressDo({hector.decirOroYCosechados()})
  	
  	//  COMIENZA
 	game.start()
