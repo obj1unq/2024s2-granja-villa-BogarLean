@@ -47,7 +47,7 @@ object hector {
 	}
 
 	method cantidadCosechada() {
-		return cosecha.sum({cultivo => 1})
+		return cosecha.size()
 	}
 
 	// ↓↓↓↓ BORRAR DESPUÉS
