@@ -2,8 +2,8 @@ import wollok.game.*
 import hector.*
 
 object tablero {
-  var property cultivos = #{}
-  var property cosas = #{}
+  const property cultivos = #{}
+  const property cosas = #{}
   
   method validarDentro(position) {
     if (not self.estaDentro(position)) self.error("No puedo seguir caminando")
@@ -37,4 +37,12 @@ object tablero {
   method hayAlgoArribaDe(cosa) = self.hayCultivoEn(
     game.at(cosa.position().x(), cosa.position().y() + 1)
   ) or self.hayCosaEn(game.at(cosa.position().x(), cosa.position().y() + 1))
+
+  method validarCosechar(posicion) {
+      if (not self.hayCultivoCosechable(posicion)) self.error("No tengo nada para cosechar")
+  }
+
+  method hayCultivoCosechable(posicion) {
+      return self.hayCultivoEn(posicion) and cultivos.find({cultivo => cultivo.position() == posicion}).esCosechable()
+  }
 }

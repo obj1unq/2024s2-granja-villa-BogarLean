@@ -41,6 +41,7 @@ describe "Granja de Hector" {
       hector.sembrar(new Tomaco())
 
       assert.that(tablero.hayAlgoArribaDe(hector))
+      assert.throwsException({ Tomaco.validarSubir() })
       assert.that(tablero.hayCultivoEn(hector.position()))
   }
 }

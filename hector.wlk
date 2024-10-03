@@ -5,6 +5,7 @@ import cultivos.*
 object hector {
 	var property position = game.at(5, 5)
 	const property image = "player.png"
+	const property cosecha = [] //Podría sembrar y cosechar en el mismo lugar
 	
 	method sembrar(cultivo) {
 		//Hector es el que las planta, los cultivos no se plantan ellos mismos
@@ -26,7 +27,19 @@ object hector {
 	method regar() {
 		const cultivo = game.uniqueCollider(self)
 		tablero.validarRegar(self.position())
-		cultivo.regado()
+		cultivo.regar()
+	}
+
+	method cosechar() {
+		const cultivo = game.uniqueCollider(self)
+		tablero.validarCosechar(self.position())
+		self.agregarCosecha(cultivo)
+		cultivo.cosechar()
+
+	}
+
+	method agregarCosecha(cultivo) {
+		cosecha.add(cultivo)
 	}
 	
 	// ↓↓↓↓ BORRAR DESPUÉS
