@@ -1,6 +1,6 @@
 import wollok.game.*
 import hector.*
-import tablero.*
+import granja.*
 
 class Maiz {
 	var property position = game.at(1, 1)
@@ -11,12 +11,13 @@ class Maiz {
 	method regar() {
 		estado = "adult"
 	}
+	
 	method cosechar() {
+		granja.quitarCultivo(self)
 		game.removeVisual(self)
 	}
-	method esCosechable() {
-		return estado == "adult"
-	}
+	
+	method esCosechable() = estado == "adult"
 }
 
 class Trigo {
@@ -28,12 +29,13 @@ class Trigo {
 	method regar() {
 		estapaDeEvolucion = (estapaDeEvolucion + 1) % 4
 	}
+	
 	method cosechar() {
+		granja.quitarCultivo(self)
 		game.removeVisual(self)
 	}
-	method esCosechable() {
-		return estapaDeEvolucion >= 2
-	}
+	
+	method esCosechable() = estapaDeEvolucion >= 2
 }
 
 class Tomaco {
@@ -53,13 +55,13 @@ class Tomaco {
 	method puedeSubir(posicion) = (posicion != game.at(
 		posicion.x(),
 		game.height() - 1
-	)) and not tablero.hayAlgoArribaDe(self)
-	// No me gustaba que atravezase a otros cultivos)
-
+	)) and not granja.hayAlgoArribaDe(self)
+	// No me gustaba que atravezase a otros cultivos))
+	
 	method cosechar() {
+		granja.quitarCultivo(self)
 		game.removeVisual(self)
 	}
-	method esCosechable() {
-		return true
-	}
+	
+	method esCosechable() = true
 }

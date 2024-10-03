@@ -1,7 +1,7 @@
 import wollok.game.*
 import hector.*
 import cultivos.*
-import tablero.*
+import granja.*
 
 describe "Granja de Hector" {
   method initialize() {
@@ -21,27 +21,39 @@ describe "Granja de Hector" {
   test "Hay planta acá" {
     hector.sembrar(new Maiz())
     
-    assert.that(tablero.hayCultivoEn(hector.position()))
+    assert.that(granja.hayCultivoEn(hector.position()))
   }
   
   test "Regar tomaco" {
     hector.sembrar(new Tomaco())
     
-    assert.that(tablero.hayCultivoEn(hector.position()))
-    assert.doesNotThrowException({ tablero.validarRegar(hector.position()) })
+    assert.that(granja.hayCultivoEn(hector.position()))
+    assert.doesNotThrowException({ granja.validarRegar(hector.position()) })
     
     hector.regar()
     
-    assert.notThat(tablero.hayCultivoEn(hector.position()))
+    assert.notThat(granja.hayCultivoEn(hector.position()))
   }
-
+  
   test "El tomaco se queda quieto" {
-      hector.sembrar(new Tomaco())
-      hector.regar()
-      hector.sembrar(new Tomaco())
-
-      assert.that(tablero.hayAlgoArribaDe(hector))
-      assert.throwsException({ Tomaco.validarSubir() })
-      assert.that(tablero.hayCultivoEn(hector.position()))
+    hector.sembrar(new Tomaco())
+    hector.regar()
+    hector.sembrar(new Tomaco())
+    
+    assert.that(granja.hayAlgoArribaDe(hector))
+    assert.throwsException({ Tomaco.validarSubir() })
+    assert.that(granja.hayCultivoEn(hector.position()))
+  }
+  
+  test "Al cosechar, se quita del tablero y lo obtiene Hector" {
+    hector.sembrar(new Maiz())
+    hector.regar()
+    
+    assert.that(not granja.cultivos().isEmpty())
+    
+    hector.cosechar()
+    
+    assert.equals(#{}, granja.cultivos())
+    assert.that(not hector.cosecha().isEmpty())
   }
 }
