@@ -25,7 +25,7 @@ object hector {
 	
 	method regar() {
 		const cultivo = game.uniqueCollider(self)
-		tablero.validarRegar()
+		tablero.validarRegar(self.position())
 		cultivo.regado()
 	}
 	

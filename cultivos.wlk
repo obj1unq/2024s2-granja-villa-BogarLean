@@ -38,8 +38,8 @@ class Tomaco {
 		if (not self.puedeSubir(position)) self.error("No puedo moverme")
 	}
 	
-	method puedeSubir(posicion) = posicion != game.at(
-		posicion.x(),
-		game.height() - 1
-	)
+	method puedeSubir(posicion) { 
+		return (posicion != game.at(posicion.x(), game.height() - 1)) and not
+			tablero.hayAlgoArribaDe(self)
+	}
 }
