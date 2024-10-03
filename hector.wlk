@@ -54,9 +54,14 @@ object hector {
 	method vender() {
 		self.validarVender()
 		oro = cosecha.sum({ cultivo => cultivo.valor() })
+		self.vaciarCosechados()
 	}
 	
 	method validarVender() {
 		if (cosecha.isEmpty()) self.error("No tengo cultvios que vender")
+	}
+
+	method vaciarCosechados() {
+		cosecha.clear()
 	}
 }
