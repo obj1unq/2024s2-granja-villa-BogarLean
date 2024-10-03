@@ -6,7 +6,7 @@ object hector {
 	var property position = game.at(5, 5)
 	const property image = "player.png"
 	const property cosecha = [] //Podría sembrar y cosechar en el mismo lugar
-	var property Oro = 0
+	var property oro = 0
 	
 	method sembrar(cultivo) {
 		//Hector es el que las planta, los cultivos no se plantan ellos mismos
@@ -43,11 +43,22 @@ object hector {
 	}
 
 	method decirOroYCultivos() {
-	  return game.say(self, Oro + " de oro y " + self.cantidadCosechada() + " cultivos para vender")
+	  return game.say(self, oro + " de oro y " + self.cantidadCosechada() + " cultivos para vender")
 	}
 
 	method cantidadCosechada() {
 		return cosecha.size()
+	}
+
+	method vender() {
+		self.validarVender()
+		cosecha.sum({cultivo => cultivo.valor()})
+	}
+
+	method validarVender() {
+		if (cosecha.isEmpty()) {
+			self.error("No tengo cultvios que vender")
+		}
 	}
 
 	// ↓↓↓↓ BORRAR DESPUÉS

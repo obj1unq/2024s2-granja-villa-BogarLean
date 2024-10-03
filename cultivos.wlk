@@ -5,6 +5,7 @@ import granja.*
 class Maiz {
 	var property position = game.at(1, 1)
 	var property estado = "baby"
+	const property valor = 150
 	
 	method image() = ("corn_" + estado) + ".png"
 	
@@ -36,10 +37,15 @@ class Trigo {
 	}
 	
 	method esCosechable() = estapaDeEvolucion >= 2
+
+	method valor() {
+		return (estapaDeEvolucion - 1) * 100
+	}
 }
 
 class Tomaco {
 	var property position = game.at(3, 2)
+	const property valor = 80
 	
 	method image() = "tomaco.png"
 	
