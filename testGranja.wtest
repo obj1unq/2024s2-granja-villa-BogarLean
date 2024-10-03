@@ -21,17 +21,26 @@ describe "Granja de Hector" {
   test "Hay planta acá" {
     hector.sembrar(new Maiz())
     
-    assert.that(tablero.hayPlantaConHector())
+    assert.that(tablero.hayCultivoEn(hector.position()))
   }
   
   test "Regar tomaco" {
     hector.sembrar(new Tomaco())
     
-    assert.that(tablero.hayPlantaConHector())
-    assert.doesNotThrowException({ tablero.validarRegar() })
+    assert.that(tablero.hayCultivoEn(hector.position()))
+    assert.doesNotThrowException({ tablero.validarRegar(hector.position()) })
     
     hector.regar()
     
-    assert.notThat(tablero.hayPlantaConHector())
+    assert.notThat(tablero.hayCultivoEn(hector.position()))
+  }
+
+  test "El tomaco se queda quieto" {
+      hector.sembrar(new Tomaco())
+      hector.regar()
+      hector.sembrar(new Tomaco())
+
+      assert.that(tablero.hayAlgoArribaDe(hector))
+      assert.that(tablero.hayCultivoEn(hector.position()))
   }
 }
