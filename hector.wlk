@@ -58,10 +58,14 @@ object hector {
 	}
 	
 	method validarVender() {
-		if (cosecha.isEmpty()) self.error("No tengo cultvios que vender")
+		if (cosecha.isEmpty()) {self.error("No tengo cultvios que vender")}
 	}
 
 	method vaciarCosechados() {
 		cosecha.clear()
+	}
+
+	method aspersor() {
+	  
 	}
 }

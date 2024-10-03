@@ -20,6 +20,7 @@ program farmville {
 	keyboard.c().onPressDo({hector.cosechar()})
 	keyboard.v().onPressDo({hector.vender()})
 	keyboard.space().onPressDo({hector.decirOroYCosechados()})
+	keyboard.a().onPressDo({hector.aspersor()})
  	
  	//  COMIENZA
 	game.start()
