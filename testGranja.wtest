@@ -1,9 +1,86 @@
-import example.pepita
+import wollok.game.*
+import hector.*
+import cultivos.*
+import granja.*
 
-describe "group of tests for pepita" {
-
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+describe "Granja de Hector" {
+  method initialize() {
+    game.height(10)
+    game.width(10)
+    game.addVisualCharacter(hector)
+  }
+  
+  test "No se puede plantar en el mismo lugar" {
+    assert.doesNotThrowException({ hector.validarSembrar() })
+    
+    hector.sembrar(new Maiz())
+    
+    assert.throwsException({ hector.validarSembrar() })
+  }
+  
+  test "Hay cultivo" {
+    hector.sembrar(new Maiz())
+    
+    assert.that(granja.hayCultivoEn(hector.position()))
+  }
+  
+  test "Regar tomaco" {
+    hector.sembrar(new Tomaco())
+    
+    assert.that(granja.hayCultivoEn(hector.position()))
+    assert.doesNotThrowException({ granja.validarRegar(hector.position()) })
+    
+    hector.regar()
+    
+    assert.notThat(granja.hayCultivoEn(hector.position()))
+  }
+  
+  test "El tomaco se queda quieto" {
+    hector.sembrar(new Tomaco())
+    hector.regar()
+    hector.sembrar(new Tomaco())
+    
+    assert.that(granja.hayAlgoAlNorteDe(hector))
+    assert.throwsException({ Tomaco.validarSubir() })
+    assert.that(granja.hayCultivoEn(hector.position()))
   }
 
+  test "No se puede regar" {
+    assert.throwsException({ granja.validarRegar(hector.position()) })
+
+    hector.sembrar(new Trigo())
+    
+    assert.doesNotThrowException({ granja.validarRegar(hector.position()) })
+  }
+  
+  test "Al cosechar, se quita del tablero y lo obtiene Hector" {
+    hector.sembrar(new Maiz())
+    hector.regar()
+    
+    assert.that(not granja.cultivos().isEmpty())
+    
+    hector.cosechar()
+    
+    assert.equals(#{}, granja.cultivos())
+    assert.that(not hector.cosecha().isEmpty())
+  }
+
+  test "Venta y cosecha de cultivos" {
+    hector.sembrar(new Maiz())
+    hector.regar()
+    hector.cosechar()
+    hector.vender()
+    hector.sembrar(new Tomaco())
+    hector.cosechar()
+    hector.sembrar(new Tomaco())
+    hector.cosechar()
+
+    assert.equals(150, hector.oro())
+    assert.equals(2, hector.cantidadCosechada())
+
+    hector.vender()
+
+    assert.throwsException({ hector.validarVender() })
+    assert.throwsException({ granja.validarCosechar(hector.position()) })
+  }
 }
