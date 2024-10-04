@@ -3,7 +3,7 @@ import hector.*
 
 object granja {
   const property cultivos = #{}
-  const property cosas = #{}
+  const property cosas = #{} // Aspersores y mercados
   
   method validarDentro(position) {
     if (not self.estaDentro(position)) self.error("No puedo seguir caminando")

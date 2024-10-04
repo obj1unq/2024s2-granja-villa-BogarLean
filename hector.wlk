@@ -5,11 +5,10 @@ import granja.*
 object hector {
 	var property position = game.at(5, 5)
 	const property image = "player.png"
-	const property cosecha = [] //Podría sembrar y cosechar en el mismo lugar
+	const property cosecha = #{}
 	var property oro = 0
 	
 	method sembrar(cultivo) {
-		//Hector es el que las planta, los cultivos no se plantan ellos mismos
 		self.validarSembrar()
 		cultivo.position(position)
 		game.addVisual(cultivo)
