@@ -1,7 +1,6 @@
 import wollok.game.*
 import cultivos.*
 import granja.*
-import aspersores.*
 
 object hector {
 	var property position = game.at(5, 5)
@@ -64,13 +63,5 @@ object hector {
 	
 	method vaciarCosechados() {
 		cosecha.clear()
-	}
-	
-	method ponerAspersor() {
-		granja.validarPonerAspersor(position)
-		const aspersor = new Aspersor()
-		aspersor.position(position)
-		granja.agregarCosa(aspersor)
-		game.addVisual(aspersor)
 	}
 }
