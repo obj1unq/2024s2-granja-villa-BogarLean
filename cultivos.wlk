@@ -60,7 +60,7 @@ class Tomaco {
 	method puedeSubir(posicion) = (posicion != game.at(
 		posicion.x(),
 		game.height() - 1
-	)) and not granja.hayAlgoArribaDe(self)
+	)) and not granja.hayAlgoAlNorteDe(self)
 	// ↑ No me gustaba que atravezase a otros cultivos
 	
 	method cosechar() {

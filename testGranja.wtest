@@ -40,7 +40,7 @@ describe "Granja de Hector" {
     hector.regar()
     hector.sembrar(new Tomaco())
     
-    assert.that(granja.hayAlgoArribaDe(hector))
+    assert.that(granja.hayAlgoAlNorteDe(hector))
     assert.throwsException({ Tomaco.validarSubir() })
     assert.that(granja.hayCultivoEn(hector.position()))
   }

@@ -1,31 +1,85 @@
 import wollok.game.*
+import granja.*
 
 class Aspersor {
     var property position = game.at(2, 2)
-    
+    var property cultivosDeAlrededor = #{}
+
     method image() = "aspersor.png"
 
     method regarAlrededor() {
-        self.regar3Arriba()
-        self.regar2Cetro()
-        self.regar3Abajo()
+        self.agregarCultivosAlrededor()
+        cultivosDeAlrededor.all({cultivo => cultivo.regado()})
     }
 
-    method regar3Arriba() {
-      //riega al norte
-      //riega al noreste
-      //riega al noroeste
+    method agregarCultivo(cultivo) {
+      cultivosDeAlrededor.add(cultivo)
     }
-    method regar2Cetro() {
-      //riega al este
-      //riega al oeste
+
+    method agregarCultivosAlrededor() {
+        self.agregarCultivosCardinalesSiHay()
+        self.agregarCultivosOrdinalesSiHay()
     }
-    method regar3Abajo() {
-      //riega al sur
-      //riega al sureste
-      //riega al suroeste
+    method agregarCultivosCardinalesSiHay() {
+      self.agregarCultivoAlNorteSiHay()
+      self.agregarCultivoAlSurSiHay()
+      self.agregarCultivoAlEsteSiHay()
+      self.agregarCultivoAlOesteSiHay()
     }
-    /*
-    ¿Dónde pondré el metódo regarEn(posicion)?
-    */
+    method agregarCultivosOrdinalesSiHay() {
+      self.agregarCultivoAlNoroesteSiHay()
+      self.agregarCultivoAlNoresteSiHay()
+      self.agregarCultivoAlSuroesteSiHay()
+      self.agregarCultivoAlSuresteSiHay()
+    }
+    method agregarCultivoAlNorteSiHay() {
+      if (granja.hayCultivoAlNorteDe(self)) {
+        const cultivo = granja.cultivos.find({cultivo => cultivo.position() == granja.norteDe(self)})
+        self.agregarCultivo(cultivo)
+      }
+    }
+    method agregarCultivoAlSurSiHay() {
+      if (granja.hayCultivoAlSurDe(self)) {
+        const cultivo = granja.cultivos.find({cultivo => cultivo.position() == granja.surDe(self)})
+        self.agregarCultivo(cultivo)
+      }
+    }
+    method agregarCultivoAlEsteSiHay() {
+      if (granja.hayCultivoAlEsteDe(self)) {
+        const cultivo = granja.cultivos.find({cultivo => cultivo.position() == granja.esteDe(self)})
+        self.agregarCultivo(cultivo)
+      }
+    }
+    method agregarCultivoAlOesteSiHay() {
+      if (granja.hayCultivoAlOesteDe(self)) {
+        const cultivo = granja.cultivos.find({cultivo => cultivo.position() == granja.oesteDe(self)})
+        self.agregarCultivo(cultivo)
+      }
+    }
+
+
+    method agregarCultivoAlNoroesteSiHay() {
+      if (granja.hayCultivoAlNoroesteDe(self)) {
+        const cultivo = granja.cultivos.find({cultivo => cultivo.position() == granja.noroesteDe(self)})
+        self.agregarCultivo(cultivo)
+      }
+    }
+    method agregarCultivoAlNoresteSiHay() {
+      if (granja.hayCultivoAlNoresteDe(self)) {
+        const cultivo = granja.cultivos.find({cultivo => cultivo.position() == granja.noresteDe(self)})
+        self.agregarCultivo(cultivo)
+      }
+    }
+    method agregarCultivoAlSuroesteSiHay() {
+      if (granja.hayCultivoAlSuroesteDe(self)) {
+        const cultivo = granja.cultivos.find({cultivo => cultivo.position() == granja.suroesteDe(self)})
+        self.agregarCultivo(cultivo)
+      }
+    }
+    method agregarCultivoAlSuresteSiHay() {
+      if (granja.hayCultivoAlOesteDe(self)) {
+        const cultivo = granja.cultivos.find({cultivo => cultivo.position() == granja.suresteDe(self)})
+        self.agregarCultivo(cultivo)
+      }
+    }
 }

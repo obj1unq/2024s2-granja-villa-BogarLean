@@ -73,8 +73,4 @@ object hector {
 		granja.agregarCosa(aspersor)
 		game.addVisual(aspersor)
 	}
-	
-	method regado() {
-		
-	}
 }
