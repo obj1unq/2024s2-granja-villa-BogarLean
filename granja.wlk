@@ -21,6 +21,10 @@ object granja {
   method quitarCultivo(cultivo) {
     cultivos.remove(cultivo)
   }
+
+  method agregarCosa(cosa) {
+      cosas.add(cosa)
+  }
   
   method validarRegar(posicion) {
     if (not self.hayCultivoEn(posicion)) self.error("No puedo regar acá")
@@ -33,10 +37,12 @@ object granja {
   method hayCosaEn(posicion) = not cosas.filter(
     { cosa => cosa.position() == posicion }
   ).isEmpty()
+
+  method hayAlgoEn(posicion) {
+      return self.hayCultivoEn(posicion) or self.hayCosaEn(posicion)
+  }
   
-  method hayAlgoArribaDe(cosa) = self.hayCultivoEn(
-    game.at(cosa.position().x(), cosa.position().y() + 1)
-  ) or self.hayCosaEn(game.at(cosa.position().x(), cosa.position().y() + 1))
+  method hayAlgoArribaDe(cosa) = self.hayAlgoEn(game.at(cosa.position().x(), cosa.position().y() + 1))
   
   method validarCosechar(posicion) {
     if (not self.hayCultivoCosechable(posicion)) self.error(
@@ -49,4 +55,10 @@ object granja {
   ) and cultivos.find(
     { cultivo => cultivo.position() == posicion }
   ).esCosechable()
+
+  method validarPonerAspersor(posicion) {
+      if (self.hayAlgoEn(posicion)) {
+        self.error("No puedo poner el aspersor acá")
+      }
+  }
 }

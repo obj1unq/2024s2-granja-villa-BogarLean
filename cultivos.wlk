@@ -9,7 +9,7 @@ class Maiz {
 	
 	method image() = ("corn_" + estado) + ".png"
 	
-	method regar() {
+	method regado() {
 		estado = "adult"
 	}
 	
@@ -27,7 +27,7 @@ class Trigo {
 	
 	method image() = ("wheat_" + estapaDeEvolucion) + ".png"
 	
-	method regar() {
+	method regado() {
 		estapaDeEvolucion = (estapaDeEvolucion + 1) % 4
 	}
 	
@@ -47,20 +47,21 @@ class Tomaco {
 	
 	method image() = "tomaco.png"
 	
-	method regar() {
+	method regado() {
 		self.validarSubir()
 		position = position.up(1)
 	}
 	
 	method validarSubir() {
 		if (not self.puedeSubir(position)) self.error("No puedo moverme")
+		// Esto se vuelve molesto con el aspersos xD
 	}
 	
 	method puedeSubir(posicion) = (posicion != game.at(
 		posicion.x(),
 		game.height() - 1
 	)) and not granja.hayAlgoArribaDe(self)
-	// No me gustaba que atravezase a otros cultivos)))
+	// ↑ No me gustaba que atravezase a otros cultivos
 	
 	method cosechar() {
 		granja.quitarCultivo(self)

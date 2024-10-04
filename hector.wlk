@@ -1,6 +1,7 @@
 import wollok.game.*
 import cultivos.*
 import granja.*
+import aspersores.*
 
 object hector {
 	var property position = game.at(5, 5)
@@ -26,13 +27,13 @@ object hector {
 	}
 	
 	method regar() {
-		granja.validarRegar(self.position())
+		granja.validarRegar(position)
 		const cultivo = game.uniqueCollider(self)
-		cultivo.regar()
+		cultivo.regado()
 	}
 	
 	method cosechar() {
-		granja.validarCosechar(self.position())
+		granja.validarCosechar(position)
 		const cultivo = game.uniqueCollider(self)
 		self.agregarCosecha(cultivo)
 		cultivo.cosechar()
@@ -58,14 +59,22 @@ object hector {
 	}
 	
 	method validarVender() {
-		if (cosecha.isEmpty()) {self.error("No tengo cultvios que vender")}
+		if (cosecha.isEmpty()) self.error("No tengo cultvios que vender")
 	}
-
+	
 	method vaciarCosechados() {
 		cosecha.clear()
 	}
-
-	method aspersor() {
-	  
+	
+	method ponerAspersor() {
+		granja.validarPonerAspersor(position)
+		const aspersor = new Aspersor()
+		aspersor.position(position)
+		granja.agregarCosa(aspersor)
+		game.addVisual(aspersor)
+	}
+	
+	method regado() {
+		
 	}
 }
