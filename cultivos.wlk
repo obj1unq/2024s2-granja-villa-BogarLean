@@ -53,7 +53,7 @@ class Tomaco {
 	}
 	
 	method validarSubir() {
-		if (not self.puedeSubir(position)) self.error("No puedo moverme")
+		if (not self.puedeSubir(position)) self.error("No puedo subir")
 		// Esto se vuelve molesto con el aspersos xD
 	}
 	

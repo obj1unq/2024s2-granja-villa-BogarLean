@@ -42,9 +42,7 @@ object granja {
     posicion
   )
   
-  method hayAlgoAlNorteDe(cosa) = self.hayAlgoEn(
-    game.at(cosa.position().x(), cosa.position().y() + 1)
-  )
+  method hayAlgoAlNorteDe(cosa) = self.hayAlgoEn(cosa.position().up(1))
   
   method validarCosechar(posicion) {
     if (not self.hayCultivoCosechable(posicion)) self.error(
